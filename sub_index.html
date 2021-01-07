@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>steam에 오신 것을 환영합니다</title>
+    <link href="css/cssccccccdjdud.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.m_menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+
+    </script>
+    <style>
+        body {
+            font-size: 13px
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        .menu>li {
+            line-height: 93px;
+
+            float: left;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s
+        }
+
+        .menu a {
+            color: #333;
+            text-decoration: none
+        }
+
+        .logo a {
+            color: #333
+        }
+
+        .submenu {
+            background: rgba(150, 124, 250, 0.9);
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            left: 0;
+            z-index: -5
+        }
+
+        .menu>li:hover .submenu {
+            opacity: 1;
+            transition: all 0.4s;
+        }
+
+        .submenu>li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            transition: all 0.4s;
+            padding: 6% 0
+        }
+
+        .menu>li:hover {
+            background: rgba(150, 200, 300, 1);
+            transition: all 0.4s;
+            z-index: 2
+        }
+
+        .submenu>li:hover {
+            background: rgba(050, 268, 300, 1);
+            transition: all 0.4s;
+        }
+
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="top_header">
+                <div class="inner">
+                    <ul class="site">
+                        <li>저장</li>
+                        <li>커뮤니티</li>
+                        <li>
+                            <select>
+                                <option>정보</option>
+                                <option>커뮤니티</option>
+                                <option>하드웨어</option>
+                                <option>게임 출시하기</option>
+                                <option>채팅</option>
+                                <option>방송</option>
+                                <option>게임 허브</option>
+                                <option>모바일 이용</option>
+                                <option>구매</option>
+                                <option>다중 언어</option>
+                                <option>컨트롤러</option>
+                                <option>창작 마당</option>
+                            </select>
+                        </li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <ul class="util">
+                        <li>로그인</li>
+                        <li>회원가입</li>
+                        <li><a href="#">언어</a>
+                            <ul class="submenu">
+                                <li><a href="#">중국어</a></li>
+                                <li><a href="#">영어</a></li>
+                                <li><a href="#">한국어</a></li>
+                                <li><a href="#">일본어</a></li>
+                            </ul>
+                        </li>
+                        <li>스팀 설치</li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+            <div class="bottom_header">
+                <div class="inner">
+                    <ul class="menu">
+                        <li><a href="#">내 상점</a>
+                            <ul class="submenu">
+                                <li><a href="#">홈</a></li>
+                                <li><a href="#">츄천 제품</a></li>
+                                <li><a href="#">최근 본 항목</a></li>
+                                <li><a href="#">스팀 큐레이터</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">포인트 상점</a>
+                            <ul class="submenu">
+                                <li><a href="sub_index.html">포인트 사용법</a></li>
+                                <li><a href="#">게임 아이템</a></li>
+                                <li><a href="#">추천 아이템</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">뉴스/스팀</a>
+                            <ul class="submenu">
+                                <li><a href="#">모든 뉴스 보기</a></li>
+                                <li><a href="#">텍스트 필터링</a></li>
+                                <li><a href="#">확장 퀴리 검색</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">고객지원</a></li>
+                    </ul>
+                    <div class="logo">
+                        <a href="index.html"> <img src="img/logo.png" alt="로고"></a>
+                    </div>
+                    <div class="sub_menu">
+                        <ul class="side">
+                            <li><i><img src="img/ico_chanel.png" alt="채널안내"></i>스트리밍 보기</li>
+                            <li><i><img src="img/ico_fee.png" alt="간편요금계산기"></i>모바일 할인</li>
+                        </ul>
+                        <div class="search">
+                            <img src="img/ico_search.png" alt="검색">
+                        </div>
+                        <div class="m_menu">
+                            <a href="#"><img src="img/ico_menu.png" alt="메뉴버튼"></a>
+                        </div>
+
+                    </div>
+                    <nav class="left_gnbWrap">
+                        <a href="#" class="close">close</a>
+                        <ul class="left_gnb">
+                            <li>
+                                <a href="#">menu1</a>
+                                <ul>
+                                    <li><a href="#">sub1</a></li>
+                                    <li><a href="#">sub2</a></li>
+                                    <li><a href="#">sub3</a></li>
+                                    <li><a href="#">sub4</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">menu2</a>
+                                <ul>
+                                    <li><a href="#">sub1</a></li>
+                                    <li><a href="#">sub2</a></li>
+                                    <li><a href="#">sub3</a></li>
+                                    <li><a href="#">sub4</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">menu3</a>
+                                <ul>
+                                    <li><a href="#">sub1</a></li>
+                                    <li><a href="#">sub2</a></li>
+                                    <li><a href="#">sub3</a></li>
+                                    <li><a href="#">sub4</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">menu4</a>
+                                <ul>
+                                    <li><a href="#">sub1</a></li>
+                                    <li><a href="#">sub2</a></li>
+                                    <li><a href="#">sub3</a></li>
+                                    <li><a href="#">sub4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+        </header>
+
+        <article id="sub_mainimg">
+            <section class="sub_mainimg_header">
+                <div class="inner">
+                    <ul>
+                        <li class="sub_logo">
+                            <img src="img/hcn_loading.png">
+                        </li>
+                        <li>
+                            <select>
+                                <option>상품</option>
+                                <option>중품</option>
+                                <option>하품</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select>
+                                <option>방송</option>
+                                <option>방콕</option>
+                                <option>바방</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select>
+                                <option>스마트HD</option>
+                                <option>바보HD</option>
+                                <option>똑똑이HD</option>
+                            </select>
+                        </li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                </div>
+                <!-- :after으로 clear:both -->
+            </section>
+
+
+            <section class="sub_mainimg">
+                <h1 class="hidden">메인이미지</h1>
+            </section>
+
+            <section class="sub_ion_set">
+                <div class="inner">
+                    <div class="sub_ion_text">
+                        <i>
+                            <img src="img/hd_ico.png">
+                        </i>
+                        <h1>스팀 서비스 둘려보기</h1>
+                    </div>
+                    <div class="aaa">
+                        <dl>
+                            <dt>
+                                <i>
+                                    <img src="img/sub1_ico1.png">
+                                </i>
+                                <h2>와이파이 6</h2>
+                            </dt>
+                            <dd>
+                                <ul>
+                                    <li>
+                                        <p class="trans">더욱 빠른 무선 인터넷 속도<br>인터넷 드롤을 처단하세요</p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>
+                                <i>
+                                    <img src="img/sub1_ico2.png">
+                                </i>
+                                <h2>음성 인식</h2>
+                            </dt>
+                            <dd>
+                                <ul>
+                                    <li>
+                                        <p class="trans">게임스킬ON/OFF,음량 조절<br>캐릭터가 곧 내가 된다</p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <i>
+                                    <img src="img/sub1_ico3.png">
+                                </i>
+                                <h2>미러링</h2>
+                            </dt>
+                            <dd>
+                                <ul>
+                                    <li>
+                                        <p class="trans">함께하기 어려울땐 폰으로!<br>공략을 보면서 하고 싶을때!</p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <i>
+                                    <img src="img/sub1_ico4.png">
+                                </i>
+                                <h2>방송 추천</h2>
+                            </dt>
+                            <dd>
+                                <ul>
+                                    <li>
+                                        <p class="trans"> 인기 스츠리머 방송을 함께!<br>나에게 꼭 맞는 컨텐스를 추천!
+                                            <p />
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <i>
+                                    <img src="img/sub1_ico5.png">
+                                </i>
+                                <h2>웹&앱</h2>
+                            </dt>
+                            <dd>
+                                <ul>
+                                    <li>
+                                        <p class="trans">TV에서 바로 게임 실행!<br>앱을 통해 더욱 쉽고 간편하게</p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sub_ion_set2">
+                <div class="inner">
+                    <div class="inner_1">
+                        <div class="l_1">
+                            <h2>상품 요금 안내</h2>
+                            <div class="sub_ion_left">
+                                <ul class="top">
+                                    <li>
+                                        <i>
+                                            <img src="img/hcn_loading.png">
+                                        </i>
+                                    <li>최신 트랜드 게임을 한번에!</li>
+                                    <li>30,000+ 게임</li>
+                                </ul>
+                                <div></div>
+                                <div class="bottom">
+                                    <h3>매주<span>새로운 게이밍</span>업로드!</h3>
+                                    <div class="btn_bottom">트랜드 보기 </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="r_1">
+                            <h2>라이브 스트리밍</h2>
+                            <div class="sub_ion_right">
+                                <div class="sub_ion_right_1">
+                                    <iframe width="560" height="230" src="https://www.youtube.com/embed/HJkS_ty01JA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="sub_ion_right_2">
+                                    <iframe width="560" height="230" src="https://www.youtube.com/embed/GMrdU1lZvoA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="sub_ion_right_3">
+                                    <iframe width="560" height="230" src="https://www.youtube.com/embed/06UMfRdrUdI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="sub_ion_right_4">
+                                    <iframe width="560" height="230" src="https://www.youtube.com/embed/P-W-yc4WTV8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <!-- :after으로 clear:both -->
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="sub_add_set">
+                <div class="inner">
+                    <ul>
+                        <li>개인</li>
+                        <li>기업</li>
+                        <li>
+                            <select>
+                                <option>지역방송</option>
+                                <option>서초</option>
+                                <option>동작</option>
+                                <option>관악</option>
+                                <option>충북</option>
+                                <option>금호</option>
+                                <option>새로넷</option>
+                                <option>경북</option>
+                                <option>부산</option>
+                            </select>
+                        </li>
+                        <li>회사소개</li>
+                        <li>미횐급금조회</li>
+                        <li>고객지원</li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <ul>
+                        <li>
+                            <select>
+                                <option>FAMILY SITE</option>
+                                <option>서초</option>
+                                <option>동작</option>
+                                <option>관악</option>
+                                <option>충북</option>
+                                <option>금호</option>
+                                <option>새로넷</option>
+                                <option>경북</option>
+                                <option>부산</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </article>
+
+
+
+
+
+        <footer>
+            <div class="top_footer">
+                <div class="inner">
+                    <ul>
+                        <li>전자공고</li>
+                        <li>개인정보처리방침</li>
+                        <li>영상정보처리기기 운영ㆍ방침</li>
+                        <li>이용약관</li>
+                        <li>스팸메일방지정책</li>
+                        <li>청소년보호정책</li>
+                        <li>이용자피해예방온라인교육</li>
+                        <li>오시는 길</li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom_footer">
+                <div class="inner">
+                    <div class="f_logo">
+                        <img src="img/logo_btm.png" alt="하단로고">
+                    </div>
+                    <div class="copyright">
+                        <ul>
+                            <li><span>주소</span>서울시 서초구 반포대로 19</li>
+                            <li><span>대표자</span>권오영</li>
+                            <li><span>사업자등록번호</span>112-81-31178</li>
+                            <li><span>개인정보보호책임자</span>권오영</li>
+                        </ul>
+                        <p>Copyright © 2020 HYUNDAI HCN All rights reserved.</p>
+                    </div>
+                    <div class="info">
+                        <ul>
+                            <li><span>고객센터</span>1877-8000</li>
+                            <li>070-8100-1000<span>(인터넷 무료전화)</span></li>
+                            <!-- :after으로 clear:both -->
+                        </ul>
+                    </div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
